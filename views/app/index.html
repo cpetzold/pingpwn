@@ -1,0 +1,115 @@
+<Head:>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+
+<Title:>
+  {{title}} - Ping Pwng
+
+  
+
+<Body:>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container">
+        <a class="brand" href="/">{{title}}</a>
+        <ul class="nav">
+        </ul>
+        <button class="btn primary" data-controls-modal="addPlayer" data-backdrop="true">Add a player</button>
+        <button class="btn primary" data-controls-modal="addGame" data-backdrop="true">Add a game</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <h1>{{title}}</h1>
+    
+    {{> players}}
+
+    <div class="row">
+      {{> addPlayer}}
+      {{> addGame}}
+    </div>
+    
+  </div>
+
+<addPlayer:>
+  <form id="addPlayer" method="post" action="player" class="modal hide">
+    <div class="modal-header">
+      <h3>Add a player</h3>
+    </div>
+    <fieldset class="modal-body">
+      <div class="clearfix">
+        <label for="newPlayerName">Name</label>
+        <div class="input">
+          <input id="newPlayerName" type="text" name="name" value="((_newPlayer.name))" placeholder="Name" />
+        </div>
+      </div>
+    </fieldset>
+    <div class="modal-footer">
+      <input type="submit" value="Add" class="btn primary" />
+    </div>
+  </form>
+
+<addGame:>
+  <form id="addGame" method="post" action="game" class="modal hide">
+    <div class="modal-header">
+      <h3>Add a game</h3>
+    </div>
+    <fieldset class="modal-body">
+      <div class="clearfix">
+        <label for="newGameWinner">Winner</label>
+        <div class="input">
+          <select id="newGameWinner" name="winner" multiple="multiple" size="5">
+            {{#players}}
+              <option value="{{name}}">{{name}}</option>
+            {{/}}
+          </select>
+        </div>
+      </div>
+      <div class="clearfix">
+        <label for="newGameLoser">Loser</label>
+        <div class="input">
+          <select id="newGameLoser" name="loser" multiple="multiple" size="5">
+            {{#players}}
+              <option value="{{name}}">{{name}}</option>
+            {{/}}
+          </select>
+        </div>
+      </div>
+    </fieldset>
+    <div class="modal-footer">
+      <input type="submit" value="Add" class="btn primary" />
+    </div>
+  </form>
+
+
+<players:>
+  <table id="players" class="zebra-striped bordered-table">
+    <thead>
+      <tr>
+        <th class="position"></th>
+        <th class="name">Name</th>
+        <th class="score">Score</th>
+        <th class="games">Games</th>
+        <th class="wins">Wins</th>
+        <th class="losses">Losses</th>
+      </tr>
+    </thead>
+    <tbody id="playerRows">
+      {{players > player}}
+    </tbody>
+  </table>
+
+<player:>
+  <tr>
+    <td class="position"></td>
+    <td class="name">{{name}}</td>
+    <td class="score">{{score}}</td>
+    <td class="games">{{games}}</td>
+    <td class="wins">{{wins}}</td>
+    <td class="losses">{{losses}}</td>
+  </tr>
+
+<Scripts:>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-modal.js"></script>
