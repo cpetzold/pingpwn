@@ -1,9 +1,35 @@
+#content
+  margin-top: 50px
+
 #players
   .position
     width: 16px
     text-align: center
+  .name,
+  .avatar
+    vertical-align: middle
+  .avatar
+    width: 24px
+    height: 24px
+    margin: -2px 6px 0 0
 
 #addPlayer,
 #addGame,
 #modal-backdrop
   display: none
+
+.ac_results
+  z-index: 11001
+  background: #fff
+  border: 1px solid #ccc
+  border-top: none
+  border-radius: 3px
+  ul
+    margin: 0
+    padding: 0
+  li
+    padding: 3px
+    &.ac_odd
+      background: #fafafa
+    &.ac_over
+      background: #eee

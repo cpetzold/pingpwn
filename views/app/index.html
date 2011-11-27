@@ -2,83 +2,59 @@
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
 
 <Title:>
-  {{title}} - Ping Pwng
-
-  
+  {{title}} - Ping Pwn
 
 <Body:>
+  {{> reportWin}}
+
   <div class="topbar">
     <div class="topbar-inner">
       <div class="container">
-        <a class="brand" href="/">{{title}}</a>
+        <a class="brand" href="/">Ping Pwn</a>
         <ul class="nav">
+          <li><a href="#" data-controls-modal="addGame" data-backdrop="true">Report a win</a>
         </ul>
-        <button class="btn primary" data-controls-modal="addPlayer" data-backdrop="true">Add a player</button>
-        <button class="btn primary" data-controls-modal="addGame" data-backdrop="true">Add a game</button>
       </div>
     </div>
   </div>
 
-  <div class="container">
-
-    <h1>{{title}}</h1>
-    
+  <div id="content" class="container">
     {{> players}}
-
-    <div class="row">
-      {{> addPlayer}}
-      {{> addGame}}
-    </div>
-    
   </div>
 
-<addPlayer:>
-  <form id="addPlayer" method="post" action="player" class="modal hide">
+<reportWin:>
+  <form id="addGame" method="post" action="game" class="modal hide keyboard">
     <div class="modal-header">
-      <h3>Add a player</h3>
-    </div>
-    <fieldset class="modal-body">
-      <div class="clearfix">
-        <label for="newPlayerName">Name</label>
-        <div class="input">
-          <input id="newPlayerName" type="text" name="name" value="((_newPlayer.name))" placeholder="Name" />
-        </div>
-      </div>
-    </fieldset>
-    <div class="modal-footer">
-      <input type="submit" value="Add" class="btn primary" />
-    </div>
-  </form>
-
-<addGame:>
-  <form id="addGame" method="post" action="game" class="modal hide">
-    <div class="modal-header">
-      <h3>Add a game</h3>
+      <h3>So you won, huh?</h3>
     </div>
     <fieldset class="modal-body">
       <div class="clearfix">
         <label for="newGameWinner">Winner</label>
         <div class="input">
-          <select id="newGameWinner" name="winner" multiple="multiple" size="5">
-            {{#players}}
-              <option value="{{name}}">{{name}}</option>
-            {{/}}
-          </select>
+          {{#user}}<input name="winner" id="newGameWinner" type="text" value="{{name}}" disabled />{{/}}
+        </div>
+      </div>
+      <div class="clearfix">
+        <label for="newGameWinnerPoints">Winner's Points</label>
+        <div class="input">
+          <input name="winnerPoints" id="newGameWinnerPoints" type="text" value="21" />
         </div>
       </div>
       <div class="clearfix">
         <label for="newGameLoser">Loser</label>
         <div class="input">
-          <select id="newGameLoser" name="loser" multiple="multiple" size="5">
-            {{#players}}
-              <option value="{{name}}">{{name}}</option>
-            {{/}}
-          </select>
+          <input name="loser" id="newGameLoser" type="text" placeholder="Who lost?" />
+        </div>
+      </div>
+      <div class="clearfix">
+        <label for="newGameLoserPoints">Loser's Points</label>
+        <div class="input">
+          <input name="loserPoints" id="newGameLoserPoints" type="text" />
         </div>
       </div>
     </fieldset>
     <div class="modal-footer">
-      <input type="submit" value="Add" class="btn primary" />
+      <input type="submit" value="Report" class="btn primary" />
     </div>
   </form>
 
@@ -89,7 +65,7 @@
       <tr>
         <th class="position"></th>
         <th class="name">Name</th>
-        <th class="score">Score</th>
+        <th class="rating">Rating</th>
         <th class="games">Games</th>
         <th class="wins">Wins</th>
         <th class="losses">Losses</th>
@@ -103,8 +79,8 @@
 <player:>
   <tr>
     <td class="position"></td>
-    <td class="name">{{name}}</td>
-    <td class="score">{{score}}</td>
+    <td class="name"><img src="http://graph.facebook.com/{{username}}/picture" class="avatar" />{{name}}</td>
+    <td class="rating">{{rating}}</td>
     <td class="games">{{games}}</td>
     <td class="wins">{{wins}}</td>
     <td class="losses">{{losses}}</td>
@@ -112,4 +88,5 @@
 
 <Scripts:>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script src="/js/jquery.ac.js"></script>
   <script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-modal.js"></script>
