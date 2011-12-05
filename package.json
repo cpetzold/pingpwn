@@ -1,12 +1,11 @@
 {
-  "name": "pwng",
+  "name": "pingpwn",
   "description": "",
   "version": "0.0.0",
   "main": "./server.js",
   "dependencies": {
     "derby": "*",
     "express": ">=2 <3",
-    "everyauth": "0.2.23",
     "connect-gzip": ">=0.1.5"
   },
   "private": true
